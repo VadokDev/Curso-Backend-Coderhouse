@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase 9</title>
+  </head>
+  <body>
+    <form
+      action="http://localhost:8080/api/users"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <label>Nombre Usuario:</label>
+      <input type="text" name="nombre" />
+      <br />
+      <label>Edad Usuario:</label>
+      <input type="number" name="edad" />
+      <br />
+      <label>Imagen Usuario:</label>
+      <input type="file" name="file" />
+      <button type="submit" value="submit">Enviar</button>
+    </form>
+  </body>
+</html>
