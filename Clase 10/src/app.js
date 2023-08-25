@@ -1,5 +1,7 @@
 import express from 'express';
 import handlebars from 'express-handlebars';
+import viewRouter from './routes/viewRouter.js';
+import userRouter from './routes/userRouter.js';
 
 const app = express();
 
@@ -7,39 +9,41 @@ app.engine('handlebars', handlebars.engine());
 app.set('views', './src/views');
 app.set('view engine', 'handlebars');
 
+app.use(express.static('./public'));
+
 app.get('/', (req, res) => {
   const db = [
     {
       name: 'Jacinto',
-      lastName: 'Hernández',
+      lastname: 'Hernández',
       age: 25,
       email: 'jacinto@hernandez.com',
       phone: '+56912345678',
     },
     {
       name: 'Eustaquio',
-      lastName: 'Fernandez',
+      lastname: 'Fernandez',
       age: 25,
       email: 'Eustaquio@hernandez.com',
       phone: '+56912345678',
     },
     {
       name: 'Eleusterio',
-      lastName: 'Longevo',
+      lastname: 'Longevo',
       age: 25,
       email: 'Eleusterio@hernandez.com',
       phone: '+56912345678',
     },
     {
       name: 'Hilda',
-      lastName: 'Sánchez',
+      lastname: 'Sánchez',
       age: 25,
       email: 'Hilda@hernandez.com',
       phone: '+56912345678',
     },
     {
       name: 'Kroudon',
-      lastName: 'Casas',
+      lastname: 'Casas',
       age: 25,
       email: 'Kroudon@hernandez.com',
       phone: '+56912345678',
@@ -51,21 +55,21 @@ app.get('/', (req, res) => {
   res.render('user', db[randomNumber]);
 });
 
-app.get('/user/:userId', (req, res) => {
+app.get('/users/:userId', (req, res) => {
   const db = [
     {
       name: 'Jacinto',
-      lastName: 'Hernández',
+      lastname: 'Hernández',
       title: 'Jacinto',
     },
     {
       name: 'Eleusterio',
-      lastName: 'Hernández',
+      lastname: 'Hernández',
       title: 'Eleusterio',
     },
     {
       name: 'Eustaquio',
-      lastName: 'Hernández',
+      lastname: 'Hernández',
       title: 'Eustaquio',
     },
   ];
@@ -73,4 +77,9 @@ app.get('/user/:userId', (req, res) => {
   res.render('user', db[req.params.userId]);
 });
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use('/', viewRouter);
+app.use('/user', userRouter);
 app.listen(8080, () => console.log('tuki'));

@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="mb-12">
+    <form action="/user" method="post">
+      <div class="mb-3">
+        <label class="form-label">Id</label>
+        <input type="text" class="form-control" name="id">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="name">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Apellido</label>
+        <input type="text" class="form-control" name="lastname" >
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Foto</label>
+        <input type="text" class="form-control" name="photoUrl" >
+      </div>
+      <button type="submit" class="btn btn-primary">Registrarse</button>
+    </form>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+  {{#each users}}
+    <div class="mb-3">
+      <div class="card" style="width: 18rem;">
+        <img src="{{this.photoUrl}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{this.name}} {{this.lastname}}</h5>
+          <p class="card-text">id: {{this.id}}.</p>
+          <a href="#" class="btn btn-primary">Ver más</a>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+  </div>
+</div>
