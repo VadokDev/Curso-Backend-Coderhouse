@@ -19,4 +19,8 @@ socketServer.on('connection', (socket) => {
   socket.on('message', (data) => {
     console.log(data);
   });
+
+  socket.on('caja_update', (data) => {
+    socket.emit('update_mensajes', { mensaje: data.mensaje });
+  });
 });
