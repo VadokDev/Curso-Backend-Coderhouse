@@ -1,0 +1,30 @@
+[
+	{
+		"id": 1,
+		"title": "Productazo",
+		"description": "descripcion",
+		"code": "123",
+		"price": 123,
+		"status": false,
+		"stock": 45,
+		"category": "Categoria",
+		"thumbnails": [
+			"/public/imagen1.jpg",
+			"/public/imagen2.jpg"
+		]
+	},
+	{
+		"id": 2,
+		"title": "Producto 2",
+		"description": "descripcion",
+		"code": "1234",
+		"price": 123,
+		"status": false,
+		"stock": 45,
+		"category": "Categoria",
+		"thumbnails": [
+			"/public/imagen1.jpg",
+			"/public/imagen2.jpg"
+		]
+	}
+]

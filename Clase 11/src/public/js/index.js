@@ -3,7 +3,7 @@ const socket = io();
 const caja = document.getElementById('caja');
 const contenido = document.getElementById('contenido');
 
-caja.addEventListener('input', (event) => {
+caja.addEventListener('onchange', (event) => {
   socket.emit('mensaje', { mensaje: event.target.value });
 });
 

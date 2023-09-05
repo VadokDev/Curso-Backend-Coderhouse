@@ -17,6 +17,8 @@ app.use('/', viewsRouter);
 const mensajes = [];
 
 socketServer.on('connection', (socket) => {
+  socketsAbiertos[socket.id] = socket;
+
   console.log(`Se conectó el usuario con socket id: ${socket.id}`);
 
   socket.on('mensaje', (data) => {
