@@ -30,7 +30,8 @@ router.post('/', async (req, res) => {
   }
 
   await productManager.addProduct(product);
-  req.context.socketServer.emit();
+  const products = await productManager.getProducts();
+  req.context.socketServer.emit('actualizar_productos', products);
   res.status(200).send();
 });
 
@@ -45,6 +46,8 @@ router.put('/:pid', async (req, res) => {
 
 router.delete('/:pid', async (req, res) => {
   await productManager.deleteProduct(parseInt(req.params.pid, 10));
+  const products = await productManager.getProducts();
+  req.context.socketServer.emit('actualizar_productos', products);
   res.status(200).send();
 });
 
