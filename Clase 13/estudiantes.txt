@@ -1,0 +1,37 @@
+db.estudiantes.insertMany([
+  {
+    nombre: "Jacinto",
+    edad: 15,
+    curso: 1,
+    apellido: "Hernández",
+    autos: 0
+  },
+  {
+    nombre: "Eleusterio",
+    edad: 16,
+    curso: 2,
+    apellido: "Pomaire",
+    autos: 2
+  },
+  {
+    nombre: "Eustaquio",
+    edad: 17,
+    curso: 3,
+    apellido: "Fernández",
+    autos: 4
+  },
+  {
+    nombre: "ElOtro",
+    edad: 15,
+    curso: 1,
+    apellido: "Apellidazo",
+    autos: 2
+  },
+  {
+    nombre: "Senku",
+    edad: 15,
+    curso: 1,
+    apellido: "Apellidazo",
+    autos: 0
+  },
+])
