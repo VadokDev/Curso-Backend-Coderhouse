@@ -2,8 +2,8 @@
   "name": "clase-14",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node ./src/app.js",
     "dev": "nodemon ./src/app.js"
@@ -13,7 +13,6 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
-    "express-handlebars": "^7.1.2",
     "mongoose": "^7.5.1"
   }
 }

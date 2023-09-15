@@ -1,22 +1,18 @@
 import { Router } from 'express';
-import { userModel } from '../models/users.model.js';
+import { userModel } from '../models/user.model.js';
 
 const router = Router();
 
 router.get('/', async (req, res) => {
-  try {
-    const users = await userModel.find();
-    res.send(users);
-  } catch (err) {
-    res.status(500).send(err);
-  }
+  const users = await userModel.find();
+  res.send(users);
 });
 
 router.post('/', async (req, res) => {
   const { first_name, last_name, email } = req.body;
 
   if (!first_name || !last_name || !email) {
-    return res.send({ status: 'error' });
+    return res.status(400).send({ error: 'Usuario inválido' });
   }
 
   const user = await userModel.create({
@@ -28,11 +24,18 @@ router.post('/', async (req, res) => {
   res.send(user);
 });
 
+router.delete('/:uid', async (req, res) => {
+  const { uid } = req.params;
+  const result = await userModel.deleteOne({ _id: uid });
+  res.send(result);
+});
+
 router.put('/:uid', async (req, res) => {
   const { uid } = req.params;
   const { first_name, last_name, email } = req.body;
+
   if (!first_name || !last_name || !email) {
-    return res.send({ status: 'error' });
+    return res.status(400).send({ error: 'Usuario inválido' });
   }
 
   const result = await userModel.updateOne(
@@ -44,12 +47,6 @@ router.put('/:uid', async (req, res) => {
     }
   );
 
-  res.send(result);
-});
-
-router.delete('/:uid', async (req, res) => {
-  const { uid } = req.params;
-  const result = await userModel.deleteOne({ _id: uid });
   res.send(result);
 });
 
