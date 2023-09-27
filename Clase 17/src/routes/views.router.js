@@ -1,21 +1,29 @@
 import { Router } from 'express';
-import studentsModel from '../models/students.model.js';
+import studentsModel from '../models/student.model.js';
 
 const router = Router();
 
-router.get('/students', async (req, res) => {
-  let page = parseInt(req.query.page);
-  if (!page) page = 1;
+router.get('/students/:pageId', async (req, res) => {
+  const pageId = parseInt(req.params.pageId);
 
-  let result = await studentsModel.paginate({}, { page, limit: 5, lean: true });
-  result.prevLink = result.hasPrevPage
-    ? `http://localhost:8080/students?page=${result.prevPage}`
-    : '';
-  result.nextLink = result.hasNextPage
-    ? `http://localhost:8080/students?page=${result.nextPage}`
-    : '';
-  result.isValid = !(page <= 0 || page > result.totalPages);
-  res.render('students', result);
+  const result = await studentsModel.paginate(
+    {},
+    {
+      page: pageId,
+      limit: 5,
+      lean: true,
+    }
+  );
+
+  const prevLink = result.hasPrevPage
+    ? `http://localhost:8080/students/${result.prevPage}`
+    : false;
+
+  const nextLink = result.hasNextPage
+    ? `http://localhost:8080/students/${result.nextPage}`
+    : false;
+
+  res.render('students', { students: result.docs, prevLink, nextLink });
 });
 
 export default router;
