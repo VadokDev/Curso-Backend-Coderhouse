@@ -6,13 +6,6 @@ const router = Router();
 
 router.get('/', async (req, res) => {});
 
-router.get('/:cid', async (req, res) => {
-  const cart = await cartModel
-    .findOne({ _id: req.params.cid })
-    .populate('products.product');
-  res.send(cart.products);
-});
-
 router.post('/', async (req, res) => {
   const { products } = req.body;
   const cart = await cartModel.create({ products });
@@ -38,7 +31,15 @@ router.post('/:cid/product/:pid', async (req, res) => {
   res.send(update);
 });
 
-router.put('/:cid', async (req, res) => {});
+router.get('/:cid', async (req, res) => {
+  const cart = await cartModel
+    .findOne({ _id: req.params.cid })
+    .populate('products.product')
+    .lean();
+
+  console.log(cart);
+  res.render('cart', { cart });
+});
 
 router.delete('/:cid', async (req, res) => {});
 
