@@ -6,6 +6,10 @@ import session from 'express-session';
 
 import viewsRouter from './routes/viewsRouter.js';
 import userRouter from './routes/userRouter.js';
+import jwtRouter from './routes/jwtRouter.js';
+
+import initializePassport from './config/passport.config.js';
+import passport from 'passport';
 
 mongoose.connect(
   'mongodb+srv://gonzalofdez06:coderhouse123@cluster0.gwswo1q.mongodb.net/?retryWrites=true&w=majority'
@@ -35,5 +39,10 @@ app.use(
 
 app.listen(8080, () => console.log('tuki'));
 
+initializePassport();
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/jwt', jwtRouter);
 app.use('/api', userRouter);
 app.use('/', viewsRouter);

@@ -6,6 +6,7 @@ import session from 'express-session';
 
 import viewsRouter from './routes/viewsRouter.js';
 import userRouter from './routes/userRouter.js';
+import jwtRouter from './routes/jwtRouter.js';
 import initializePassport from './config/passport.config.js';
 import passport from 'passport';
 

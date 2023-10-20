@@ -1,0 +1,40 @@
+
+<input type="text" name="email" id="email" value="email" />
+<button value="button" id="loginButton">Logearse</button>
+<button value="button" id="verDatosButton">Ver mis datos</button>
+
+<script>
+  let token = "";
+  const emailBox = document.getElementById('email');
+  const loginButton = document.getElementById('loginButton');
+  const verDatosButton = document.getElementById('verDatosButton');
+
+  loginButton.addEventListener('click', (e) => {
+    fetch('http://localhost:8080/jwt/login', {
+      method: 'POST',
+      headers:  {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({email: emailBox.value})
+    }).then((res) => res.json()).then((res) => {
+      token = res.token;
+    })
+  })
+
+  verDatosButton.addEventListener('click', (e) => {
+    fetch('http://localhost:8080/jwt/current', {
+      method: 'GET',
+      headers:  {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    }).then((res) => res.json()).then((res) => {
+      console.log(res);
+    })
+  })
+
+  
+
+</script>

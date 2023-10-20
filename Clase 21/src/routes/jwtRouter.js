@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import jwt from 'jsonwebtoken';
-import { JWT_PRIVATE_KEY } from '../config/constants';
-import jwtAuth from '../middleware/jwtAuth';
+import { JWT_PRIVATE_KEY } from '../config/constants.js';
+import jwtAuth from '../middleware/jwtAuth.js';
 
 const router = Router();
 const users = [];

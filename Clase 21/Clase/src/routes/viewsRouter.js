@@ -22,4 +22,8 @@ router.get('/logout', (req, res) => {
   res.redirect('/login');
 });
 
+router.get('/jwt', (req, res) => {
+  res.render('jwt');
+});
+
 export default router;
