@@ -1,0 +1,100 @@
+paths:
+  /api/users:
+    get:
+      summary: Obtiene todos los usuarios
+      tags: 
+        - Users
+      responses:
+        "200":
+          description: Los usuarios fueron obtenidos satisfactoriamente desde la bd
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/User'
+        "500":
+          description: Algo falló en la búsqueda de usuarios en la base de datos
+  /api/users/{uid}:
+    get:
+      summary: Obtiene un usuario según su id
+      tags:
+        - Users
+      parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Id del usuario a buscar
+        schema:
+          $type: String
+      responses:
+        "200":
+          description: Usuario encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/User'
+    put:
+      summary: Actualiza un usuario a partir de su id
+      tags:
+        - Users
+      parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Id del usuario a buscar
+        schema:
+          $type: String
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/updateUser'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado de mongo
+        first_name:
+          type: String
+          description: Nombre del usuario
+        last_name:
+          type: String
+          description: Apellido del usuario
+        email:
+          type: String
+          description: Correo del usuario, campo único
+        password:
+          type: String
+          description: Contraseña hasheada del usuario
+      example:
+        _id: ObjectId("asd")
+        first_name: Jacinto
+        last_name: De las Mercedes
+        email: jacinto@coderhouse.com
+        password: asd123hasheado
+  requestBodies:
+    updateUser:
+      type: object
+      properties:
+        first_name:
+          type: String
+          description: Nombre del usuario
+        last_name:
+          type: String
+          description: Apellido del usuario
+        email:
+          type: String
+          description: Correo del usuario, campo único
+        password:
+          type: String
+          description: Contraseña hasheada del usuario
+      example:
+        first_name: Jacinto
+        last_name: De las Mercedes
+        email: jacinto@coderhouse.com
+        password: asd123hasheado

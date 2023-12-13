@@ -1,0 +1,72 @@
+paths:
+  /api/pets:
+    get:
+      summary: Obtiene todas las mascotas
+      tags:
+        - Pets
+      responses:
+        "200":
+          description: Salio todo perfecto
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Pet'
+    post:
+      summary: Crea una mascota
+      tags:
+        - Pets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/createPet'
+components:
+  schemas:
+    Pet:
+      type: object
+      properties:
+        _id:
+          type: ObjectId()
+          description: id unico de la mascota
+        name:
+          type: String
+          description: asd 
+        specie:
+          type: String
+          description: asd
+        birthDate:
+          type: String
+          description: asd
+        adopted:
+          type: Boolean
+          description: asd
+        image:
+          type: String
+          description: asd
+      example:
+        _id: 65726690b20d7affe280cc37
+        name: Jacinto
+        specie: Perro
+        birthDate: "1997-12-12T03:00:00.000Z"
+        adopted: false
+        image: "http://localhost:8080/imagen"
+  requestBodies:
+    createPet:
+      type: object
+      properties:
+        name:
+          type: String
+          description: asdf
+        specie:
+          type: String
+          description: asdf
+        birthDate:
+          type: String
+          description: asdf
+      example:
+        name: Jacinto
+        specie: Perro
+        birthDate: 12/12/1997
