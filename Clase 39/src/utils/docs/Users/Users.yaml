@@ -2,10 +2,10 @@ paths:
   /api/users:
     get:
       summary: Obtiene todos los usuarios
-      tags: 
+      tags:
         - Users
       responses:
-        "200":
+        '200':
           description: Los usuarios fueron obtenidos satisfactoriamente desde la bd
           content:
             application/json:
@@ -13,7 +13,7 @@ paths:
                 type: array
                 items:
                   $ref: '#components/schemas/User'
-        "500":
+        '500':
           description: Algo falló en la búsqueda de usuarios en la base de datos
   /api/users/{uid}:
     get:
@@ -21,14 +21,14 @@ paths:
       tags:
         - Users
       parameters:
-      - name: uid
-        in: path
-        required: true
-        description: Id del usuario a buscar
-        schema:
-          $type: String
+        - name: uid
+          in: path
+          required: true
+          description: Id del usuario a buscar
+          schema:
+            $type: String
       responses:
-        "200":
+        '200':
           description: Usuario encontrado
           content:
             application/json:
@@ -39,12 +39,12 @@ paths:
       tags:
         - Users
       parameters:
-      - name: uid
-        in: path
-        required: true
-        description: Id del usuario a buscar
-        schema:
-          $type: String
+        - name: uid
+          in: path
+          required: true
+          description: Id del usuario a buscar
+          schema:
+            $type: String
       requestBody:
         required: true
         content:
@@ -53,6 +53,34 @@ paths:
               $ref: '#components/requestBodies/updateUser'
 components:
   schemas:
+    PetX:
+      type: object
+      properties:
+        _id:
+          type: ObjectId()
+          description: id unico de la mascota
+        name:
+          type: String
+          description: asd
+        specie:
+          type: String
+          description: asd
+        birthDate:
+          type: String
+          description: asd
+        adopted:
+          type: Boolean
+          description: asd
+        image:
+          type: String
+          description: asd
+      example:
+        _id: 65726690b20d7affe280cc37
+        name: Jacinto
+        specie: Perro
+        birthDate: '1997-12-12T03:00:00.000Z'
+        adopted: false
+        image: 'http://localhost:8080/imagen'
     User:
       type: object
       properties:
@@ -71,6 +99,10 @@ components:
         password:
           type: String
           description: Contraseña hasheada del usuario
+        pets:
+          type: array
+          items:
+            $ref: '#components/schemas/PetX'
       example:
         _id: ObjectId("asd")
         first_name: Jacinto
